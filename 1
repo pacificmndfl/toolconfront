@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            line-height: 1.6;
+        }
+        h3 {
+            color: #333;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 8px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h3>Reasons to Confront:</h3>
+        <label><input type="checkbox" class="confront"> Not speaking up would tank your confidence</label>
+        <label><input type="checkbox" class="confront"> Speaking up now is very important to your values</label>
+        <label><input type="checkbox" class="confront"> The microaggression violated your human rights</label>
+        <label><input type="checkbox" class="confront"> The other person could likely hear you out & take in what you're saying</label>
+        <label><input type="checkbox" class="confront"> The other person is typically reasonable & rational</label>
+        <label><input type="checkbox" class="confront"> You have a positive relationship with the other person</label>
+        <label><input type="checkbox" class="confront"> Your emotions are relatively low intensity & wouldn't lead you to do or say something regrettable</label>
+        <label><input type="checkbox" class="confront"> Other</label>
+    </div>
+
+    <div class="section">
+        <h3>Reasons to Avoid:</h3>
+        <label><input type="checkbox" class="avoid"> The microaggression threatened your safety</label>
+        <label><input type="checkbox" class="avoid"> You fear the other person could retaliate if you spoke up</label>
+        <label><input type="checkbox" class="avoid"> The other person is known to be hot-tempered & unreasonable</label>
+        <label><input type="checkbox" class="avoid"> You're sick & tired of educating people about what is & isn't okay to say</label>
+        <label><input type="checkbox" class="avoid"> Avoiding confrontation would protect your peace</label>
+        <label><input type="checkbox" class="avoid"> Your emotions are very intense right now & you could do something regrettable</label>
+    </div>
+
+    <button onclick="calculateResult()">Submit</button>
+
+    <div id="result"></div>
+
+    <script>
+        function calculateResult() {
+            const confrontChecks = document.querySelectorAll('.confront');
+            const avoidChecks = document.querySelectorAll('.avoid');
+
+            let confrontCount = 0;
+            let avoidCount = 0;
+
+            // Count checked boxes for confront reasons
+            confrontChecks.forEach(box => {
+                if (box.checked) confrontCount++;
+            });
+
+            // Count checked boxes for avoid reasons
+            avoidChecks.forEach(box => {
+                if (box.checked) avoidCount++;
+            });
+
+            // Generate response
+            let resultText = '';
+            if (confrontCount > avoidCount) {
+                resultText = You have more reasons to confront (${confrontCount} vs. ${avoidCount}). Speaking up might align better with your values and goals.;
+            } else if (avoidCount > confrontCount) {
+                resultText = You have more reasons to avoid confrontation (${avoidCount} vs. ${confrontCount}). Protecting your peace and safety might be the best choice right now.;
+            } else {
+                resultText = You have an equal number of reasons to confront and avoid (${confrontCount} each). Reflect on which choice aligns most with your priorities.;
+            }
+
+            // Display result
+            document.getElementById('result').innerText = resultText;
+        }
+    </script>
+</body>
+</html>
